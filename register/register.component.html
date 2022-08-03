@@ -1,0 +1,629 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <form
+    class="align-items-center col-md-7 spacing-form section-main"
+    (ngSubmit)="sendRegister()"
+    [formGroup]="registerForm"
+  >
+    <div class="login-wrap">
+      <div class="img-login"></div>
+
+      <h3 class="mb-2">S'enregister</h3>
+      <p class="">Sign in by entering the information below</p>
+
+      <div class="section-separator"></div>
+
+      <h4 class="mb-3">Information Personnelle</h4>
+      <div class="form-group row">
+        <label for="image" class="col-sm-2 col-form-label">
+          {{ 'form.image' | translate }}
+        </label>
+        <div class="col-sm-10 position-relative">
+          <input
+            type="file"
+            class="img-control position-relative"
+            id="image"
+            name="image"
+            formControlName="image"
+            placeholder=" {{ 'form.exp_nom' | translate }}"
+          />
+          <img
+            [defaultImage]="'assets/images/user.png'"
+            [lazyLoad]="registerForm.image"
+            alt=""
+            class="img-person-form"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="nom" class="col-sm-2 col-form-label">
+          {{ 'form.nom' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            name="nom"
+            placeholder=" {{ 'form.exp_nom' | translate }}"
+            formControlName="nom"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('nom')?.touched &&
+                registerForm.get('nom')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('nom')?.touched &&
+              registerForm.get('nom')?.invalid
+            "
+            class="invalid-feedback mb-2"
+          >
+            <div *ngIf="registerForm.get('nom')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('nom')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('nom')?.errors?.['maxlength']">
+              {{ 'form.champ_30' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('nom')?.errors?.['pattern']">
+              {{ 'form.champ_lettre' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="pernom" class="col-sm-2 col-form-label">
+          {{ 'form.prenom' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="prenom"
+            name="prenom"
+            formControlName="prenom"
+            placeholder=" {{ 'form.exp_pre' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('prenom')?.touched &&
+                registerForm.get('prenom')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('prenom')?.touched &&
+              registerForm.get('prenom')?.invalid
+            "
+            class="invalid-feedback mb-2"
+          >
+            <div *ngIf="registerForm.get('prenom')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('prenom')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('prenom')?.errors?.['maxlength']">
+              {{ 'form.champ_30' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('prenom')?.errors?.['pattern']">
+              {{ 'form.champ_lettre' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">
+          {{ 'form.email' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            formControlName="email"
+            placeholder=" {{ 'form.exp_email' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('email')?.touched &&
+                registerForm.get('email')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('email')?.touched &&
+              registerForm.get('email')?.invalid
+            "
+            class="invalid-feedback mb-2"
+          >
+            <div *ngIf="registerForm.get('email')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('email')?.errors?.['email']">
+              {{ 'form.mail_valid' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="telephone" class="col-sm-2 col-form-label">
+          {{ 'form.telephone' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="telephone"
+            name="telephone"
+            formControlName="telephone"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('telephone')?.touched &&
+                registerForm.get('telephone')?.invalid
+            }"
+            placeholder=" {{ 'form.exp_tel' | translate }}"
+          />
+          <div
+            *ngIf="
+              registerForm.get('telephone')?.touched &&
+              registerForm.get('telephone')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('telephone')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('telephone')?.errors?.['pattern']">
+              {{ 'form.tel_valid' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('telephone')?.errors?.['minlength']">
+              {{ 'form.champ_10' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="adresse" class="col-sm-2 col-form-label">
+          {{ 'form.adresse' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="adresse"
+            name="adresse"
+            formControlName="adresse"
+            placeholder=" {{ 'form.exp_adresse' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('adresse')?.touched &&
+                registerForm.get('adresse')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('adresse')?.touched &&
+              registerForm.get('adresse')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('adresse')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('adresse')?.errors?.['pattern']">
+              {{ 'form.tel_valid' | translate }}
+            </div>
+            <div *ngIf="registerForm.get('adresse')?.errors?.['minlength']">
+              {{ 'form.champ_10' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="pays" class="col-sm-2 col-form-label">
+          {{ 'form.pays' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="pays"
+            name="pays"
+            formControlName="pays"
+            placeholder=" {{ 'form.exp_pays' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('pays')?.touched &&
+                registerForm.get('pays')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('pays')?.touched &&
+              registerForm.get('pays')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('pays')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+
+            <div *ngIf="registerForm.get('pays')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ville" class="col-sm-2 col-form-label">
+          {{ 'form.ville' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="ville"
+            name="ville"
+            formControlName="ville"
+            placeholder=" {{ 'form.exp_ville' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('ville')?.touched &&
+                registerForm.get('ville')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('ville')?.touched &&
+              registerForm.get('ville')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('ville')?.errors?.['required']">
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+
+            <div *ngIf="registerForm.get('ville')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateNaissance" class="col-sm-2 col-form-label">
+          {{ 'form.date_naiss' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="date"
+            class="form-control"
+            id="dateNaissance"
+            name="dateNaissance"
+            formControlName="dateNaissance"
+            placeholder=" {{ 'form.exp_date_naiss' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('dateNaissance')?.touched &&
+                registerForm.get('dateNaissance')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('dateNaissance')?.touched &&
+              registerForm.get('dateNaissance')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="registerForm.get('dateNaissance')?.errors?.['required']"
+            >
+              {{ 'form.champ_oblig' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-separator"></div>
+      <h4 class="mb-3">Formation</h4>
+
+      <div class="form-group row">
+        <label for="haut_diplome" class="col-sm-2 col-form-label">
+          {{ 'form.haut_diplome' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="diplome"
+            name="diplome"
+            formControlName="diplome"
+            placeholder=" {{ 'form.exp_haut_diplome' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('diplome')?.touched &&
+                registerForm.get('diplome')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('diplome')?.touched &&
+              registerForm.get('diplome')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('diplome')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="universite" class="col-sm-2 col-form-label">
+          {{ 'form.universite' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="universite"
+            name="universite"
+            formControlName="universite"
+            placeholder=" {{ 'form.exp_universite' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('universite')?.touched &&
+                registerForm.get('universite')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('universite')?.touched &&
+              registerForm.get('universite')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('universite')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="specialisation" class="col-sm-2 col-form-label">
+          {{ 'form.domaine' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="specialisation"
+            formControlName="specialisation"
+            placeholder=" {{ 'form.exp_domaine' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('specialisation')?.touched &&
+                registerForm.get('specialisation')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('specialisation')?.touched &&
+              registerForm.get('specialisation')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="registerForm.get('specialisation')?.errors?.['minlength']"
+            >
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-separator"></div>
+      <h4 class="mb-3">Expérience professionnelle</h4>
+
+      <div class="form-group row">
+        <label for="statut" class="col-sm-2 col-form-label">
+          {{ 'form.statut' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="statut"
+            name="statut"
+            placeholder=" {{ 'form.exp_statut' | translate }}"
+            formControlName="statut"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('statut')?.touched &&
+                registerForm.get('statut')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('statut')?.touched &&
+              registerForm.get('statut')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('statut')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="secteur" class="col-sm-2 col-form-label">
+          {{ 'form.secteur' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="secteur"
+            name="secteur"
+            formControlName="secteur"
+            placeholder=" {{ 'form.exp_secteur' | translate }}"
+            formControlName="secteur"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('secteur')?.touched &&
+                registerForm.get('secteur')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('secteur')?.touched &&
+              registerForm.get('secteur')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('secteur')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="employeur" class="col-sm-2 col-form-label">
+          {{ 'form.employeur' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="employeur"
+            name="employeur"
+            formControlName="employeur"
+            placeholder=" {{ 'form.exp_employeur' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('employeur')?.touched &&
+                registerForm.get('employeur')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('employeur')?.touched &&
+              registerForm.get('employeur')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('employeur')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="profession" class="col-sm-2 col-form-label">
+          {{ 'form.profession' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="profession"
+            name="profession"
+            formControlName="profession"
+            placeholder=" {{ 'form.exp_profession' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('profession')?.touched &&
+                registerForm.get('profession')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('profession')?.touched &&
+              registerForm.get('profession')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('profession')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="domaine" class="col-sm-2 col-form-label">
+          {{ 'form.domaine' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            name="domaine"
+            formControlName="domaine"
+            placeholder=" {{ 'form.exp_domaine' | translate }}"
+            [ngClass]="{
+              'is-invalid':
+                registerForm.get('domaine')?.touched &&
+                registerForm.get('domaine')?.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              registerForm.get('domaine')?.touched &&
+              registerForm.get('domaine')?.invalid
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registerForm.get('domaine')?.errors?.['minlength']">
+              {{ 'form.champ_3' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="experience" class="col-sm-2 col-form-label">
+          {{ 'form.experience' | translate }}
+        </label>
+        <div class="col-sm-10">
+          <select
+            id="experience"
+            name="experience"
+            class="form-select"
+            formControlName="experience"
+          >
+            <option disabled>
+              {{ 'form.exp_experience' | translate }}
+            </option>
+            <option value="{{ 'form.exp1' | translate }}">
+              {{ 'form.exp1' | translate }}
+            </option>
+            <option value="{{ 'form.exp2' | translate }}">
+              {{ 'form.exp2' | translate }}
+            </option>
+            <option value="{{ 'form.exp3' | translate }}">
+              {{ 'form.exp3' | translate }}
+            </option>
+            <option value="{{ 'form.exp4' | translate }}">
+              {{ 'form.exp4' | translate }}
+            </option>
+            <option value="{{ 'form.exp5' | translate }}">
+              {{ 'form.exp5' | translate }}
+            </option>
+            <option value="{{ 'form.exp6' | translate }}">
+              {{ 'form.exp6' | translate }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-info px-5">
+        {{ 'form.Envoyer' | translate }}
+      </button>
+    </div>
+  </form>
+</div>
